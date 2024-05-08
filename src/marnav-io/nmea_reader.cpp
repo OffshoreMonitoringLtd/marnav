@@ -68,8 +68,6 @@ void nmea_reader::process_nmea()
 			if ((raw_ < 32) || (raw_ >= 127))
 				return;
 
-			if (sentence_.size() > nmea::sentence::max_length)
-				throw std::length_error{"sentence size to large. receiving NMEA data?"};
 			sentence_ += raw_;
 			break;
 	}
