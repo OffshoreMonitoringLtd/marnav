@@ -9,14 +9,11 @@
 
 #include <algorithm>
 #include <iomanip>
-#include <limits>
 #include <locale>
 #include <sstream>
 #include <type_traits>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 namespace
 {
@@ -53,7 +50,7 @@ std::string format(int32_t data, unsigned int width, data_format f)
 {
 	// buffer to hold the resulting string with a static size.
 	// this construct prevents VLA, and should be replaced with C++14 dynarray
-	char buf[32];
+	char buf[32] = {0};
 	if (width >= sizeof(buf))
 		throw std::invalid_argument{"width too large in nmea::format"};
 
@@ -73,7 +70,7 @@ std::string format(int32_t data, unsigned int width, data_format f)
 
 std::string format(uint64_t data, unsigned int width, data_format f)
 {
-	char buf[std::numeric_limits<uint64_t>::digits10 + 1u] = {0};
+	char buf[32] = {0};
 
 	if (width >= sizeof(buf))
 		throw std::invalid_argument{"width too large in nmea::format"};
@@ -93,7 +90,7 @@ std::string format(uint64_t data, unsigned int width, data_format f)
 
 std::string format(uint32_t data, unsigned int width, data_format f)
 {
-	char buf[std::numeric_limits<uint32_t>::digits10 + 1u] = {0};
+	char buf[32] = {0};
 
 	if (width >= sizeof(buf))
 		throw std::invalid_argument{"width too large in nmea::format"};
@@ -554,6 +551,5 @@ void read(const std::string & s, waypoint & value, data_format fmt)
 	typename waypoint::value_type t;
 	read(s, t, fmt);
 	value = waypoint{t};
-}
 }
 }

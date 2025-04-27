@@ -2,10 +2,9 @@
 #define MARNAV_NMEA_DATE_HPP
 
 #include <string>
+#include <cstdint>
 
-namespace marnav
-{
-namespace nmea
+namespace marnav::nmea
 {
 
 /// Enumeration of all months of a year.
@@ -73,7 +72,6 @@ private:
 };
 
 std::string to_string(const date & d);
-}
 }
 
 #endif

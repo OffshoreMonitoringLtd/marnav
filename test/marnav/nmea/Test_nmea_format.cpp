@@ -6,11 +6,11 @@ namespace
 {
 using namespace marnav;
 
-class Test_nmea_format : public ::testing::Test
+class test_nmea_format : public ::testing::Test
 {
 };
 
-TEST_F(Test_nmea_format, format_dec_uint32)
+TEST_F(test_nmea_format, format_dec_uint32)
 {
 	struct entry {
 		uint32_t value;
@@ -36,7 +36,13 @@ TEST_F(Test_nmea_format, format_dec_uint32)
 	}
 }
 
-TEST_F(Test_nmea_format, format_hex_uint32)
+TEST_F(test_nmea_format, format_dec_uint32_max)
+{
+	const auto result = nmea::format(std::numeric_limits<std::uint32_t>::max(), 1, nmea::data_format::dec);
+	EXPECT_STREQ("4294967295", result.c_str());
+}
+
+TEST_F(test_nmea_format, format_hex_uint32)
 {
 	struct entry {
 		uint32_t value;
@@ -62,7 +68,7 @@ TEST_F(Test_nmea_format, format_hex_uint32)
 	}
 }
 
-TEST_F(Test_nmea_format, format_dec_uint64)
+TEST_F(test_nmea_format, format_dec_uint64)
 {
 	struct entry {
 		uint64_t value;
@@ -92,7 +98,13 @@ TEST_F(Test_nmea_format, format_dec_uint64)
 	}
 }
 
-TEST_F(Test_nmea_format, format_hex_uint64)
+TEST_F(test_nmea_format, format_dec_uint64_max)
+{
+	const auto result = nmea::format(std::numeric_limits<std::uint64_t>::max(), 1, nmea::data_format::dec);
+	EXPECT_STREQ("18446744073709551615", result.c_str());
+}
+
+TEST_F(test_nmea_format, format_hex_uint64)
 {
 	struct entry {
 		uint64_t value;

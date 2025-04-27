@@ -2,10 +2,9 @@
 #define MARNAV_UTILS_MMSI_COUNTRY_HPP
 
 #include <string>
+#include <cstdint>
 
-namespace marnav
-{
-namespace utils
+namespace marnav::utils
 {
 class mmsi; // forward
 
@@ -16,7 +15,6 @@ struct mmsi_country_info {
 };
 
 mmsi_country_info mmsi_country(const mmsi & m);
-}
 }
 
 #endif
